@@ -39,6 +39,7 @@ async function blogFromEntry(entry: Dirent): Promise<Blog> {
 }
 
 export async function getAllBlogs(): Promise<Blog[]> {
+    console.log(path.resolve(process.cwd(), "blogs"));
     const blogEntries = await fs.readdir(path.resolve(process.cwd(), "blogs"), { withFileTypes: true });
     return await Promise.all(blogEntries.map(blogFromEntry));
 }
