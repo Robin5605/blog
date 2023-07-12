@@ -1,7 +1,7 @@
 ---
 title: "DevBlog: Infrastructure"
 description: "I go over the DevOps & infrastructure side of things"
-tags: "DevBlog, TestTag"
+tags: "DevBlog"
 ---
 
 So, originally all the infrastructure was hosted on AWS.
