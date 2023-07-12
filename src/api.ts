@@ -12,10 +12,7 @@ export interface Blog {
 }
 
 async function blogFromEntry(entry: Dirent): Promise<Blog> {
-    console.log(entry.path, entry.name);
-    const entryPath = path.join(entry.path, entry.name);
-    console.log(entryPath);
-    const contents = await fs.readFile(entryPath);
+    const contents = await fs.readFile(`./blogs/${entry.name}`);
     const { attributes, body } = fm(contents.toString());
     const metadata = attributes as any;
 
@@ -41,12 +38,12 @@ async function blogFromEntry(entry: Dirent): Promise<Blog> {
 }
 
 export async function getAllBlogs(): Promise<Blog[]> {
-    const blogEntries = await fs.readdir(path.resolve(process.cwd(), "blogs"), { withFileTypes: true });
+    const blogEntries = await fs.readdir("./blogs/", { withFileTypes: true });
     return await Promise.all(blogEntries.map(blogFromEntry));
 }
 
 export async function getBlogBySlug(slug: string): Promise<Blog> {
-    const blogEntries = await fs.readdir(path.resolve(process.cwd(), "blogs"), { withFileTypes: true });
+    const blogEntries = await fs.readdir("./blogs/", { withFileTypes: true });
     const entry = blogEntries.find(
         (entry) => encodeURI(path.parse(entry.name).name) === slug,
     );
