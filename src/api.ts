@@ -39,12 +39,12 @@ async function blogFromEntry(entry: Dirent): Promise<Blog> {
 }
 
 export async function getAllBlogs(): Promise<Blog[]> {
-    const blogEntries = await fs.readdir("./blogs/", { withFileTypes: true });
+    const blogEntries = await fs.readdir(process.cwd() + "/blogs/", { withFileTypes: true });
     return await Promise.all(blogEntries.map(blogFromEntry));
 }
 
 export async function getBlogBySlug(slug: string): Promise<Blog> {
-    const blogEntries = await fs.readdir("./blogs/", { withFileTypes: true });
+    const blogEntries = await fs.readdir(process.cwd() + "/blogs/", { withFileTypes: true });
     const entry = blogEntries.find(
         (entry) => encodeURI(path.parse(entry.name).name) === slug,
     );
