@@ -1,6 +1,8 @@
 {
-    "extends": ["next/core-web-vitals", "next", "prettier"],
+    "plugins": ["prettier"],
+    "extends": ["next/core-web-vitals", "next", "plugin:prettier/recommended"],
     "rules": {
-        "react/no-unescaped-entities": "off"
+        "react/no-unescaped-entities": "off",
+        "prettier/prettier": "error"
     }
 }
