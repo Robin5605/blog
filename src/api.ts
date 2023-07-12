@@ -12,7 +12,9 @@ export interface Blog {
 }
 
 async function blogFromEntry(entry: Dirent): Promise<Blog> {
+    console.log(entry.path, entry.name);
     const entryPath = path.join(entry.path, entry.name);
+    console.log(entryPath);
     const contents = await fs.readFile(entryPath);
     const { attributes, body } = fm(contents.toString());
     const metadata = attributes as any;
@@ -39,7 +41,6 @@ async function blogFromEntry(entry: Dirent): Promise<Blog> {
 }
 
 export async function getAllBlogs(): Promise<Blog[]> {
-    console.log(path.resolve(process.cwd(), "blogs"));
     const blogEntries = await fs.readdir(path.resolve(process.cwd(), "blogs"), { withFileTypes: true });
     return await Promise.all(blogEntries.map(blogFromEntry));
 }
